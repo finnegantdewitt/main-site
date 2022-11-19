@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Boids from "./components/Boids";
+import BoidsLayout from "./components/BoidsLayout";
 
 function App() {
   return (
@@ -14,7 +15,10 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="boids" element={<Boids />} />
+          {/* <Route path="boids" element={<Boids />} /> */}
+        </Route>
+        <Route path="/boids" element={<BoidsLayout />}>
+          <Route index element={<Boids />} />
         </Route>
       </Routes>
     </>
