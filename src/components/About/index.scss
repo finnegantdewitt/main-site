@@ -24,6 +24,7 @@
     height: 200px;
     border: 1px solid #ccc;
     background: rgba(255, 255, 255, 0.4);
+    text-align: center;
     font-size: 100px;
     display: flex;
     justify-content: center;
@@ -35,7 +36,7 @@
     transform: translateZ(100px);
   }
   .face2 {
-    transform: rotateY(90deg) translateZ(100px);
+    transform: rotateY(90deg) translateZ(100px) rotate(-90deg);
   }
   .face3 {
     transform: rotateY(90deg) rotateX(90deg) translateZ(100px);

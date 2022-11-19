@@ -41,6 +41,11 @@
       position: relative;
       text-decoration: none;
 
+      .custom-svg {
+        width: 20px;
+        height: auto;
+      }
+
       i {
         transition: all 0.3s ease-out;
       }
@@ -48,7 +53,8 @@
       &:hover {
         color: #ffd700;
 
-        svg {
+        svg,
+        .custom-svg {
           opacity: 0;
         }
 
@@ -86,6 +92,12 @@
     a.contact-link {
       &:after {
         content: "CONTACT";
+      }
+    }
+
+    a.boids-link {
+      &:after {
+        content: "BOIDS";
       }
     }
 
