@@ -105,6 +105,10 @@
       svg {
         color: #ffd700;
       }
+      .custom-svg {
+        filter: brightness(0) saturate(100%) invert(71%) sepia(93%)
+          saturate(695%) hue-rotate(359deg) brightness(104%) contrast(106%);
+      }
     }
   }
 

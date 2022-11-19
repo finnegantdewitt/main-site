@@ -7,7 +7,7 @@ function randomIntFromInterval(min, max) {
 }
 
 class Boids {
-  constructor(scene, boidBoxWidth, boidBoxHeight, boidBoxDepth) {
+  constructor(scene, boidsCount, boidBoxWidth, boidBoxHeight, boidBoxDepth) {
     // make the boids box
     const boidBoxMesh = new THREE.LineSegments(
       box(boidBoxWidth, boidBoxHeight, boidBoxDepth),
@@ -25,7 +25,7 @@ class Boids {
 
     // generate the boids
     this.boidsArray = [];
-    const numberOfBoids = 200;
+    const numberOfBoids = boidsCount;
     const boidGeo = new THREE.ConeGeometry(1, 3.9, 12);
     boidGeo.rotateX(Math.PI * 0.5);
     const minX = boidBoxMesh.position.x - Math.floor(boidBoxWidth / 2);

@@ -1,36 +1,55 @@
 import "./index.scss";
 import { init, animate } from "../../boids/index.js";
 import crosshairImg from "../../assets/images/crosshair.svg";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import ReactSlider from "react-slider";
 
 const Boids = () => {
+  const [boidsCount, setBoidsCount] = useState(100);
   const mountRef = useRef(null);
 
   useEffect(() => {
-    let removeRenderer = init(mountRef);
+    let removeRenderer = init(mountRef, boidsCount);
     animate();
     return removeRenderer;
-  }, []);
+  }, [boidsCount]);
 
   return (
     <>
-      <div className="top-bar"></div>
+      <div className="top-bar">
+        <ul className="elements">
+          <li>
+            BOIDS: <br /> Click screen to play <br /> ESC to pause
+          </li>
+          <li>
+            Movement: <br /> WASD to move <br /> E Q : UP DOWN
+          </li>
+          <li>
+            Controls: <br /> T : freeze boids <br /> F : mark boid
+          </li>
+          <li>
+            <input
+              type="range"
+              min="1"
+              max="500"
+              onChange={(e) => {
+                setBoidsCount(e.target.value);
+              }}
+              className="slider"
+            />
+            <div>Number of Boids: {boidsCount}</div>
+          </li>
+        </ul>
+      </div>
       <div id="blocker">
         <div id="instructions">
           <p style={{ fontSize: "36px" }}>Click to play</p>
           <p>
-            Move: WASD
-            <br />
-            Up/Down: E/Q
-            <br />
             Increase/Decrease avoidFactor: U/J
             <br />
             Increase/Decrease alignFactor: I/K
             <br />
             Increase/Decrease centeringFactor: O/L
-            <br />
-            Pause the Boids: T<br />
-            Look: MOUSE
           </p>
         </div>
       </div>

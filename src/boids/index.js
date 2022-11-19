@@ -31,13 +31,14 @@ let moveRight = false;
 let moveUp = false;
 let moveDown = false;
 let pauseBoids = false;
+let pauseCount = 0; // very annoying hack bc keypress registers twice???????????????
 let stats;
 
 let prevTime = performance.now();
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
 
-function init(mountRef) {
+function init(mountRef, boidsCount) {
   camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -84,7 +85,14 @@ function init(mountRef) {
   const onKeyPress = function (event) {
     switch (event.code) {
       case "KeyT":
-        pauseBoids = !pauseBoids;
+        // annoying workaround because using this
+        // with react for some reason registers a
+        // keypress twice. So just divide the count
+        // by 2 and if even it's false.
+        pauseCount += 1;
+        Math.floor(pauseCount / 2) % 2 === 0
+          ? (pauseBoids = false)
+          : (pauseBoids = true);
         break;
       case "KeyF":
         controls.getDirection(mouse3D);
@@ -240,7 +248,13 @@ function init(mountRef) {
   scene.add(floorMesh);
 
   // Bring In The Boids
-  boids = new Boids(scene, boidBoxWidth, boidBoxHeight, boidBoxDepth);
+  boids = new Boids(
+    scene,
+    boidsCount,
+    boidBoxWidth,
+    boidBoxHeight,
+    boidBoxDepth
+  );
   // const gui = new GUI();
   // gui.add(boids, "avoidFactor", 0, 100, 1).listen().name("Avoid Factor (U/J)");
   // gui
@@ -277,8 +291,9 @@ function onWindowResize() {
 }
 
 function animate() {
-  requestAnimationFrame(animate);
-
+  setTimeout(function () {
+    requestAnimationFrame(animate);
+  }, 1000 / 60);
   const time = performance.now();
 
   if (controls.isLocked === true) {
