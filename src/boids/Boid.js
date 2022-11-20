@@ -17,6 +17,7 @@ class Boid {
     this.maxZ = 100;
     this.wallMargin = 10;
     this.turnFactor = 0.2;
+    this.isShot = false;
   }
   setXBounds(min, max) {
     this.minX = min;
@@ -44,6 +45,10 @@ class Boid {
   removeMesh(scene) {
     scene.remove(this.mesh);
   }
+  shoot() {
+    this.isShot = !this.isShot;
+    return this.isShot;
+  }
   move() {
     // if (
     //   (this.mesh.position.x > this.maxX  && this.velocity.x > 0) ||
@@ -63,6 +68,19 @@ class Boid {
     // ) {
     //   this.velocity.z = -this.velocity.z;
     // }
+
+    if (this.isShot) {
+      if (this.mesh.position.y > 3) {
+        this.velocity.y += -0.2;
+        this.mesh.position.y += this.velocity.y;
+        let newDir = new THREE.Vector3().addVectors(
+          this.mesh.position,
+          new THREE.Vector3().randomDirection()
+        );
+        this.mesh.lookAt(newDir);
+      }
+      return;
+    }
 
     if (this.mesh.position.x > this.maxX - this.wallMargin) {
       this.velocity.x += -this.turnFactor;

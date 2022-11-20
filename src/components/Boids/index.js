@@ -8,6 +8,7 @@ const Boids = () => {
   const [boxBoundsWidth, setBoxBoundsWidth] = useState(200);
   const [boxBoundsDepth, setBoxBoundsDepth] = useState(200);
   const [boxBoundsHeight, setBoxBoundsHeight] = useState(100);
+  const [shootBoidsMode, setShootBoidsMode] = useState(true);
   const mountRef = useRef(null);
 
   useEffect(() => {
@@ -30,7 +31,22 @@ const Boids = () => {
             Movement: <br /> WASD to move <br /> E Q : UP DOWN
           </li>
           <li>
-            Controls: <br /> T : freeze boids <br /> F : mark boid
+            Controls: <br /> T : freeze boids <br /> F :{" "}
+            {shootBoidsMode ? "shoot" : "mark"} boid
+          </li>
+          <li style={{ minWidth: "88px" }}>
+            <label className="switch">
+              <input
+                type="checkbox"
+                id="shootBoidMode"
+                checked={shootBoidsMode}
+                onChange={() => setShootBoidsMode(!shootBoidsMode)}
+              />
+              <span className="toggle-slider"></span>
+            </label>
+            <div>
+              {shootBoidsMode ? "Mode: Kill boids" : "Mode: Mark boids "}
+            </div>
           </li>
           <li>
             <input
@@ -92,13 +108,8 @@ const Boids = () => {
       </div>
       <div id="blocker">
         <div id="instructions">
-          <p style={{ fontSize: "36px" }}>Click to play</p>
-          <p>
-            Increase/Decrease avoidFactor: U/J
-            <br />
-            Increase/Decrease alignFactor: I/K
-            <br />
-            Increase/Decrease centeringFactor: O/L
+          <p style={{ fontSize: "36px", color: "white" }}>
+            Click to Start <br /> ESC to Stop / Change settings
           </p>
         </div>
       </div>

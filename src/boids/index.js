@@ -29,6 +29,7 @@ let moveDown = false;
 let pauseBoids = false;
 let stats;
 let isAnimationDone = false;
+let shootBoidMode = true;
 
 // clock for framerate
 let clock = new THREE.Clock();
@@ -112,6 +113,14 @@ function init(boidsCount, boidBox) {
           for (let i = 0; i < boids.length(); i++) {
             if (boids.get(i).mesh.id == mesh.id) {
               // console.log(boids.get(i));
+              if (shootBoidMode) {
+                let isShot = boids.get(i).shoot(mesh);
+                if (!isShot) {
+                  mesh.material.color.setHex(0x02196f3);
+                } else {
+                  mesh.material.color.setHex(0xff00000);
+                }
+              }
               console.log(
                 "Pos: %o\nVel: %o",
                 boids.get(i).mesh.position,
@@ -119,7 +128,9 @@ function init(boidsCount, boidBox) {
               );
             }
           }
-          mesh.material.color.setHex(0xff00000);
+          if (!shootBoidMode) {
+            mesh.material.color.setHex(0x02196f3);
+          }
         }
         break;
       case "KeyU":
@@ -239,6 +250,9 @@ function init(boidsCount, boidBox) {
       boidBox.height = e.target.value;
       boids.newBox(scene, boidBox);
     });
+  document.getElementById("shootBoidMode").addEventListener("change", (e) => {
+    shootBoidMode = document.getElementById("shootBoidMode").checked;
+  });
 
   // skybox
   const cubeTextureLoader = new THREE.CubeTextureLoader();
