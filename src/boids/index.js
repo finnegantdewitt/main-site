@@ -31,14 +31,19 @@ let moveRight = false;
 let moveUp = false;
 let moveDown = false;
 let pauseBoids = false;
-let pauseCount = 0; // very annoying hack bc keypress registers twice???????????????
 let stats;
+let isAnimationDone = false;
+
+// clock for framerate
+let clock = new THREE.Clock();
+let delta = 0;
+let interval = 1 / 60;
 
 let prevTime = performance.now();
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
 
-function init(mountRef, boidsCount) {
+function init(boidsCount) {
   camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -89,10 +94,12 @@ function init(mountRef, boidsCount) {
         // with react for some reason registers a
         // keypress twice. So just divide the count
         // by 2 and if even it's false.
-        pauseCount += 1;
-        Math.floor(pauseCount / 2) % 2 === 0
-          ? (pauseBoids = false)
-          : (pauseBoids = true);
+        pauseBoids = !pauseBoids;
+        // pauseCount += 1;
+        // Math.floor(pauseCount / 2) % 2 === 0
+        //   ? (pauseBoids = false)
+        //   : (pauseBoids = true);
+        // console.log(pauseCount);
         break;
       case "KeyF":
         controls.getDirection(mouse3D);
@@ -270,16 +277,29 @@ function init(mountRef, boidsCount) {
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
-  mountRef.current.appendChild(renderer.domElement);
+  // mountRef.current.appendChild(renderer.domElement);
+  document.getElementById("mountingForBoids").appendChild(renderer.domElement);
+  isAnimationDone = false;
 
   // stats = new Stats();
   // mountRef.current.appendChild(stats.dom);
 
   window.addEventListener("resize", onWindowResize);
+  animate();
   return () => {
-    if (mountRef.current !== null) {
-      mountRef.current.removeChild(renderer.domElement);
-    }
+    // if (mountRef.current !== null) {
+    //   mountRef.current.removeChild(renderer.domElement);
+    // }
+    console.log("renderer.domElement: " + renderer.domElement);
+    console.log("getElem: " + document.getElementById("mountingForBoids"));
+    isAnimationDone = true;
+    document
+      .getElementById("mountingForBoids")
+      .removeChild(renderer.domElement);
+    document.removeEventListener("keydown", onKeyDown);
+    document.removeEventListener("keyup", onKeyUp);
+    document.removeEventListener("keypress", onKeyPress);
+    window.removeEventListener("resize", onWindowResize);
   };
 }
 
@@ -291,9 +311,6 @@ function onWindowResize() {
 }
 
 function animate() {
-  setTimeout(function () {
-    requestAnimationFrame(animate);
-  }, 1000 / 60);
   const time = performance.now();
 
   if (controls.isLocked === true) {
@@ -329,7 +346,16 @@ function animate() {
     }
   }
   prevTime = time;
-  renderer.render(scene, camera);
+
+  delta += clock.getDelta();
+  if (delta > interval) {
+    renderer.render(scene, camera);
+    delta = delta % interval;
+  }
+  if (isAnimationDone) {
+    return;
+  }
+  requestAnimationFrame(animate);
   // stats.update();
 }
 

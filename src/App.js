@@ -21,6 +21,7 @@ function App() {
           <Route index element={<Boids />} />
         </Route>
       </Routes>
+      <div id="mountingForBoids"></div>
     </>
   );
 }

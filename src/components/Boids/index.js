@@ -2,17 +2,16 @@ import "./index.scss";
 import { init, animate } from "../../boids/index.js";
 import crosshairImg from "../../assets/images/crosshair.svg";
 import { useEffect, useRef, useState } from "react";
-import ReactSlider from "react-slider";
 
 const Boids = () => {
   const [boidsCount, setBoidsCount] = useState(100);
   const mountRef = useRef(null);
 
   useEffect(() => {
-    let removeRenderer = init(mountRef, boidsCount);
-    animate();
+    let removeRenderer = init(boidsCount);
+    // animate();
     return removeRenderer;
-  }, [boidsCount]);
+  }, []);
 
   return (
     <>
