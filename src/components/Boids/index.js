@@ -9,9 +9,9 @@ const Boids = () => {
   const [boxBoundsWidth, setBoxBoundsWidth] = useState(150);
   const [boxBoundsDepth, setBoxBoundsDepth] = useState(150);
   const [boxBoundsHeight, setBoxBoundsHeight] = useState(100);
-  const [avoidFactor, setAvoidFactor] = useState(150);
-  const [alignFactor, setAlignFactor] = useState(150);
-  const [centeringFactor, setCenteringFactor] = useState(100);
+  const [avoidFactor, setAvoidFactor] = useState(50);
+  const [alignFactor, setAlignFactor] = useState(50);
+  const [centeringFactor, setCenteringFactor] = useState(50);
 
   useEffect(() => {
     let removeRenderer = init(boidsCount, {
@@ -107,6 +107,51 @@ const Boids = () => {
                 className="slider"
               />
               <label className="slider-label"> Height: {boxBoundsHeight}</label>
+            </div>
+          </li>
+          <li>
+            <span>Boid Factors</span>
+          </li>
+          <li>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              id="avoidFactor"
+              value={avoidFactor}
+              onChange={(e) => {
+                setAvoidFactor(e.target.value);
+              }}
+              className="slider"
+            />
+            <label className="slider-label"> Avoid: {avoidFactor}</label>
+            <div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                id="alignFactor"
+                value={alignFactor}
+                onChange={(e) => {
+                  setAlignFactor(e.target.value);
+                }}
+                className="slider"
+              />
+              <label className="slider-label"> Align: {alignFactor}</label>
+            </div>
+            <div>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                id="centeringFactor"
+                value={centeringFactor}
+                onChange={(e) => {
+                  setCenteringFactor(e.target.value);
+                }}
+                className="slider"
+              />
+              <label className="slider-label"> Center: {centeringFactor}</label>
             </div>
           </li>
         </ul>

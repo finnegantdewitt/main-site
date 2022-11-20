@@ -236,6 +236,17 @@ function init(boidsCount, boidBox) {
         boids.removeBoids(scene, -1 * newLen);
       }
     });
+  document.getElementById("avoidFactor").addEventListener("mouseup", (e) => {
+    boids.avoidFactor = e.target.value;
+  });
+  document.getElementById("alignFactor").addEventListener("mouseup", (e) => {
+    boids.alignFactor = e.target.value;
+  });
+  document
+    .getElementById("centeringFactor")
+    .addEventListener("mouseup", (e) => {
+      boids.centeringFactor = e.target.value;
+    });
   document.getElementById("boxBoundsWidth").addEventListener("mouseup", (e) => {
     boidBox.width = e.target.value;
     boids.newBox(scene, boidBox);
