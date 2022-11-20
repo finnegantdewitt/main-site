@@ -4,12 +4,14 @@ import crosshairImg from "../../assets/images/crosshair.svg";
 import { useEffect, useRef, useState } from "react";
 
 const Boids = () => {
-  const [boidsCount, setBoidsCount] = useState(100);
-  const [boxBoundsWidth, setBoxBoundsWidth] = useState(200);
-  const [boxBoundsDepth, setBoxBoundsDepth] = useState(200);
-  const [boxBoundsHeight, setBoxBoundsHeight] = useState(100);
+  const [boidsCount, setBoidsCount] = useState(200);
   const [shootBoidsMode, setShootBoidsMode] = useState(true);
-  const mountRef = useRef(null);
+  const [boxBoundsWidth, setBoxBoundsWidth] = useState(150);
+  const [boxBoundsDepth, setBoxBoundsDepth] = useState(150);
+  const [boxBoundsHeight, setBoxBoundsHeight] = useState(100);
+  const [avoidFactor, setAvoidFactor] = useState(150);
+  const [alignFactor, setAlignFactor] = useState(150);
+  const [centeringFactor, setCenteringFactor] = useState(100);
 
   useEffect(() => {
     let removeRenderer = init(boidsCount, {
@@ -63,6 +65,9 @@ const Boids = () => {
             <div>Number of Boids: {boidsCount}</div>
           </li>
           <li>
+            <span>Box Dimensions</span>
+          </li>
+          <li>
             <input
               type="range"
               min="10"
@@ -74,35 +79,35 @@ const Boids = () => {
               }}
               className="slider"
             />
-            <div>Width of box: {boxBoundsWidth}</div>
-          </li>
-          <li>
-            <input
-              type="range"
-              min="10"
-              max="500"
-              id="boxBoundsDepth"
-              value={boxBoundsDepth}
-              onChange={(e) => {
-                setBoxBoundsDepth(e.target.value);
-              }}
-              className="slider"
-            />
-            <div>Depth of box: {boxBoundsDepth}</div>
-          </li>
-          <li>
-            <input
-              type="range"
-              min="10"
-              max="500"
-              id="boxBoundsHeight"
-              value={boxBoundsHeight}
-              onChange={(e) => {
-                setBoxBoundsHeight(e.target.value);
-              }}
-              className="slider"
-            />
-            <div>Height of box: {boxBoundsHeight}</div>
+            <label className="slider-label"> Width: {boxBoundsWidth}</label>
+            <div>
+              <input
+                type="range"
+                min="10"
+                max="500"
+                id="boxBoundsDepth"
+                value={boxBoundsDepth}
+                onChange={(e) => {
+                  setBoxBoundsDepth(e.target.value);
+                }}
+                className="slider"
+              />
+              <label className="slider-label"> Depth: {boxBoundsDepth}</label>
+            </div>
+            <div>
+              <input
+                type="range"
+                min="10"
+                max="500"
+                id="boxBoundsHeight"
+                value={boxBoundsHeight}
+                onChange={(e) => {
+                  setBoxBoundsHeight(e.target.value);
+                }}
+                className="slider"
+              />
+              <label className="slider-label"> Height: {boxBoundsHeight}</label>
+            </div>
           </li>
         </ul>
       </div>
@@ -116,7 +121,6 @@ const Boids = () => {
       <div id="crosshair" style={{ display: "none" }}>
         <img id="crosshairImage" src={crosshairImg} />
       </div>
-      <div ref={mountRef}></div>
     </>
   );
 };
