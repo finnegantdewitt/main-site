@@ -7,10 +7,10 @@ function randomIntFromInterval(min, max) {
 }
 
 class Boids {
-  constructor(scene, boidsCount, boidBoxWidth, boidBoxHeight, boidBoxDepth) {
+  constructor(scene, boidsCount, boidBox) {
     // make the boids box
     const boidBoxMesh = new THREE.LineSegments(
-      box(boidBoxWidth, boidBoxHeight, boidBoxDepth),
+      box(boidBox),
       new THREE.LineBasicMaterial({
         color: 0xffffff,
         linewidth: 1,
@@ -20,7 +20,7 @@ class Boids {
       })
     );
     boidBoxMesh.computeLineDistances();
-    boidBoxMesh.translateY(Math.ceil(boidBoxHeight / 2));
+    boidBoxMesh.translateY(Math.ceil(boidBox.height / 2));
     scene.add(boidBoxMesh);
 
     // generate the boids
@@ -28,12 +28,12 @@ class Boids {
     const numberOfBoids = boidsCount;
     const boidGeo = new THREE.ConeGeometry(1, 3.9, 12);
     boidGeo.rotateX(Math.PI * 0.5);
-    const minX = boidBoxMesh.position.x - Math.floor(boidBoxWidth / 2);
-    const maxX = boidBoxMesh.position.x + Math.floor(boidBoxWidth / 2);
-    const minY = boidBoxMesh.position.y - Math.floor(boidBoxHeight / 2);
-    const maxY = boidBoxMesh.position.y + Math.floor(boidBoxHeight / 2);
-    const minZ = boidBoxMesh.position.z - Math.floor(boidBoxDepth / 2);
-    const maxZ = boidBoxMesh.position.z + Math.floor(boidBoxDepth / 2);
+    const minX = boidBoxMesh.position.x - Math.floor(boidBox.width / 2);
+    const maxX = boidBoxMesh.position.x + Math.floor(boidBox.width / 2);
+    const minY = boidBoxMesh.position.y - Math.floor(boidBox.height / 2);
+    const maxY = boidBoxMesh.position.y + Math.floor(boidBox.height / 2);
+    const minZ = boidBoxMesh.position.z - Math.floor(boidBox.depth / 2);
+    const maxZ = boidBoxMesh.position.z + Math.floor(boidBox.depth / 2);
     for (let i = 0; i < numberOfBoids; i++) {
       const boidMat = new THREE.MeshPhongMaterial({ color: 0xffffff });
       const boidMesh = new THREE.Mesh(boidGeo, boidMat);
@@ -63,12 +63,47 @@ class Boids {
       maxZ: maxZ,
     };
     this.boidGeo = boidGeo;
+
+    // for modifying box
+    this.boidBoxMesh = boidBoxMesh;
   }
   get(index) {
     return this.boidsArray[index];
   }
   length() {
     return this.boidsArray.length;
+  }
+  newBox(scene, boidBox) {
+    scene.remove(this.boidBoxMesh);
+    // make the boids box
+    const boidBoxMesh = new THREE.LineSegments(
+      box(boidBox),
+      new THREE.LineBasicMaterial({
+        color: 0xffffff,
+        linewidth: 1,
+        scale: 1,
+        dashSize: 3,
+        gapSize: 1,
+      })
+    );
+    boidBoxMesh.computeLineDistances();
+    boidBoxMesh.translateY(Math.ceil(boidBox.height / 2));
+    scene.add(boidBoxMesh);
+
+    const minX = boidBoxMesh.position.x - Math.floor(boidBox.width / 2);
+    const maxX = boidBoxMesh.position.x + Math.floor(boidBox.width / 2);
+    const minY = boidBoxMesh.position.y - Math.floor(boidBox.height / 2);
+    const maxY = boidBoxMesh.position.y + Math.floor(boidBox.height / 2);
+    const minZ = boidBoxMesh.position.z - Math.floor(boidBox.depth / 2);
+    const maxZ = boidBoxMesh.position.z + Math.floor(boidBox.depth / 2);
+
+    for (let boid of this.boidsArray) {
+      boid.setXBounds(minX, maxX);
+      boid.setYBounds(minY, maxY);
+      boid.setZBounds(minZ, maxZ);
+    }
+
+    this.boidBoxMesh = boidBoxMesh;
   }
   addBoids(scene, n) {
     for (let i = 0; i < n; i++) {
@@ -189,10 +224,10 @@ class Boids {
   }
 }
 
-function box(width, height, depth) {
-  width = width * 0.5;
-  height = height * 0.5;
-  depth = depth * 0.5;
+function box(boidBox) {
+  let width = boidBox.width * 0.5;
+  let height = boidBox.height * 0.5;
+  let depth = boidBox.depth * 0.5;
 
   const geometry = new THREE.BufferGeometry();
   const position = [];

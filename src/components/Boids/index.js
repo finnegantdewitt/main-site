@@ -5,10 +5,17 @@ import { useEffect, useRef, useState } from "react";
 
 const Boids = () => {
   const [boidsCount, setBoidsCount] = useState(100);
+  const [boxBoundsWidth, setBoxBoundsWidth] = useState(200);
+  const [boxBoundsDepth, setBoxBoundsDepth] = useState(200);
+  const [boxBoundsHeight, setBoxBoundsHeight] = useState(100);
   const mountRef = useRef(null);
 
   useEffect(() => {
-    let removeRenderer = init(boidsCount);
+    let removeRenderer = init(boidsCount, {
+      width: boxBoundsWidth,
+      depth: boxBoundsDepth,
+      height: boxBoundsHeight,
+    });
     return removeRenderer;
   }, []);
 
@@ -31,12 +38,55 @@ const Boids = () => {
               min="1"
               max="500"
               id="boidsCountSlider"
+              value={boidsCount}
               onChange={(e) => {
                 setBoidsCount(e.target.value);
               }}
               className="slider"
             />
             <div>Number of Boids: {boidsCount}</div>
+          </li>
+          <li>
+            <input
+              type="range"
+              min="10"
+              max="500"
+              id="boxBoundsWidth"
+              value={boxBoundsWidth}
+              onChange={(e) => {
+                setBoxBoundsWidth(e.target.value);
+              }}
+              className="slider"
+            />
+            <div>Width of box: {boxBoundsWidth}</div>
+          </li>
+          <li>
+            <input
+              type="range"
+              min="10"
+              max="500"
+              id="boxBoundsDepth"
+              value={boxBoundsDepth}
+              onChange={(e) => {
+                setBoxBoundsDepth(e.target.value);
+              }}
+              className="slider"
+            />
+            <div>Depth of box: {boxBoundsDepth}</div>
+          </li>
+          <li>
+            <input
+              type="range"
+              min="10"
+              max="500"
+              id="boxBoundsHeight"
+              value={boxBoundsHeight}
+              onChange={(e) => {
+                setBoxBoundsHeight(e.target.value);
+              }}
+              className="slider"
+            />
+            <div>Height of box: {boxBoundsHeight}</div>
           </li>
         </ul>
       </div>

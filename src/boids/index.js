@@ -16,10 +16,6 @@ let camera, scene, renderer, controls;
 let boids;
 const objects = [];
 
-let boidBoxWidth = 300;
-let boidBoxHeight = 100;
-let boidBoxDepth = 300;
-
 let raycaster = new THREE.Raycaster();
 let mouse3D = new THREE.Vector3(); // used for raycaster
 
@@ -43,7 +39,7 @@ let prevTime = performance.now();
 const velocity = new THREE.Vector3();
 const direction = new THREE.Vector3();
 
-function init(boidsCount) {
+function init(boidsCount, boidBox) {
   camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
@@ -229,6 +225,20 @@ function init(boidsCount) {
         boids.removeBoids(scene, -1 * newLen);
       }
     });
+  document.getElementById("boxBoundsWidth").addEventListener("mouseup", (e) => {
+    boidBox.width = e.target.value;
+    boids.newBox(scene, boidBox);
+  });
+  document.getElementById("boxBoundsDepth").addEventListener("mouseup", (e) => {
+    boidBox.depth = e.target.value;
+    boids.newBox(scene, boidBox);
+  });
+  document
+    .getElementById("boxBoundsHeight")
+    .addEventListener("mouseup", (e) => {
+      boidBox.height = e.target.value;
+      boids.newBox(scene, boidBox);
+    });
 
   // skybox
   const cubeTextureLoader = new THREE.CubeTextureLoader();
@@ -267,13 +277,7 @@ function init(boidsCount) {
   scene.add(floorMesh);
 
   // Bring In The Boids
-  boids = new Boids(
-    scene,
-    boidsCount,
-    boidBoxWidth,
-    boidBoxHeight,
-    boidBoxDepth
-  );
+  boids = new Boids(scene, boidsCount, boidBox);
   // const gui = new GUI();
   // gui.add(boids, "avoidFactor", 0, 100, 1).listen().name("Avoid Factor (U/J)");
   // gui
