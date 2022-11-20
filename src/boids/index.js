@@ -36,7 +36,7 @@ let isAnimationDone = false;
 
 // clock for framerate
 let clock = new THREE.Clock();
-let delta = 0;
+let clock_delta = 0;
 let interval = 1 / 60;
 
 let prevTime = performance.now();
@@ -99,7 +99,7 @@ function init(boidsCount) {
         // Math.floor(pauseCount / 2) % 2 === 0
         //   ? (pauseBoids = false)
         //   : (pauseBoids = true);
-        // console.log(pauseCount);
+        console.log(pauseBoids);
         break;
       case "KeyF":
         controls.getDirection(mouse3D);
@@ -218,6 +218,18 @@ function init(boidsCount) {
   document.addEventListener("keyup", onKeyUp);
   document.addEventListener("keypress", onKeyPress);
 
+  document
+    .getElementById("boidsCountSlider")
+    .addEventListener("mouseup", (e) => {
+      let boidsArrayLen = boids.boidsArray.length;
+      let newLen = e.target.value - boidsArrayLen;
+      if (newLen > 0) {
+        boids.addBoids(scene, newLen);
+      } else {
+        boids.removeBoids(scene, -1 * newLen);
+      }
+    });
+
   // skybox
   const cubeTextureLoader = new THREE.CubeTextureLoader();
   const skybox = cubeTextureLoader.load([
@@ -250,7 +262,7 @@ function init(boidsCount) {
   ).toNonIndexed();
   const floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
   floorMesh.rotation.x = -Math.PI / 2;
-  console.log(floorMesh.position);
+  // console.log(floorMesh.position);
 
   scene.add(floorMesh);
 
@@ -287,9 +299,6 @@ function init(boidsCount) {
   window.addEventListener("resize", onWindowResize);
   animate();
   return () => {
-    // if (mountRef.current !== null) {
-    //   mountRef.current.removeChild(renderer.domElement);
-    // }
     console.log("renderer.domElement: " + renderer.domElement);
     console.log("getElem: " + document.getElementById("mountingForBoids"));
     isAnimationDone = true;
@@ -347,10 +356,10 @@ function animate() {
   }
   prevTime = time;
 
-  delta += clock.getDelta();
-  if (delta > interval) {
+  clock_delta += clock.getDelta();
+  if (clock_delta > interval) {
     renderer.render(scene, camera);
-    delta = delta % interval;
+    clock_delta = clock_delta % interval;
   }
   if (isAnimationDone) {
     return;

@@ -41,6 +41,9 @@ class Boid {
       (this.velocity.z += z)
     );
   }
+  removeMesh(scene) {
+    scene.remove(this.mesh);
+  }
   move() {
     // if (
     //   (this.mesh.position.x > this.maxX  && this.velocity.x > 0) ||

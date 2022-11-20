@@ -9,7 +9,6 @@ const Boids = () => {
 
   useEffect(() => {
     let removeRenderer = init(boidsCount);
-    // animate();
     return removeRenderer;
   }, []);
 
@@ -31,6 +30,7 @@ const Boids = () => {
               type="range"
               min="1"
               max="500"
+              id="boidsCountSlider"
               onChange={(e) => {
                 setBoidsCount(e.target.value);
               }}

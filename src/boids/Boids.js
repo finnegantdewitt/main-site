@@ -52,12 +52,46 @@ class Boids {
     this.alignFactor = 50;
     this.centeringFactor = 50;
     this.radiusOfVision = 25;
+
+    // for adding boids
+    this.bounds = {
+      minX: minX,
+      maxX: maxX,
+      minY: minY,
+      maxY: maxY,
+      minZ: minZ,
+      maxZ: maxZ,
+    };
+    this.boidGeo = boidGeo;
   }
   get(index) {
     return this.boidsArray[index];
   }
   length() {
     return this.boidsArray.length;
+  }
+  addBoids(scene, n) {
+    for (let i = 0; i < n; i++) {
+      const boidMat = new THREE.MeshPhongMaterial({ color: 0xffffff });
+      const boidMesh = new THREE.Mesh(this.boidGeo, boidMat);
+      boidMesh.translateX(
+        randomIntFromInterval(this.bounds.minX, this.bounds.maxX)
+      );
+      boidMesh.translateZ(
+        randomIntFromInterval(this.bounds.minZ, this.bounds.maxZ)
+      );
+      const newBoid = new Boid(boidMesh, scene);
+      newBoid.setXBounds(this.bounds.minX, this.bounds.maxX);
+      newBoid.setYBounds(this.bounds.minY, this.bounds.maxY);
+      newBoid.setZBounds(this.bounds.minZ, this.bounds.maxZ);
+      this.boidsArray.push(newBoid);
+    }
+  }
+  removeBoids(scene, n) {
+    for (let i = 0; i < n; i++) {
+      let boidToRemove = this.boidsArray.pop();
+      boidToRemove.removeMesh(scene);
+    }
   }
   moveBoids() {
     for (let i = 0; i < this.boidsArray.length; i++) {
