@@ -64,7 +64,7 @@ class Boids {
     };
     this.boidGeo = boidGeo;
 
-    // for modifying box
+    // for modifying box and adding boids
     this.boidBoxMesh = boidBoxMesh;
   }
   get(index) {
@@ -103,6 +103,14 @@ class Boids {
       boid.setZBounds(minZ, maxZ);
     }
 
+    this.bounds = {
+      minX: minX,
+      maxX: maxX,
+      minY: minY,
+      maxY: maxY,
+      minZ: minZ,
+      maxZ: maxZ,
+    };
     this.boidBoxMesh = boidBoxMesh;
   }
   addBoids(scene, n) {
