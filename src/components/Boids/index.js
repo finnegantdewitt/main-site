@@ -26,15 +26,15 @@ const Boids = () => {
     <>
       <div className="top-bar">
         <ul className="elements">
-          <li>
-            BOIDS: <br /> Click screen to play <br /> ESC to pause
+          <li className="boids-dialog">
+            BOIDS: <br /> Click screen to play <br /> ESC to stop
           </li>
           <li>
             Movement: <br /> WASD to move <br /> E Q : UP DOWN
           </li>
-          <li>
+          <li className="controls">
             Controls: <br /> T : freeze boids <br /> F :{" "}
-            {shootBoidsMode ? "shoot" : "mark"} boid
+            {shootBoidsMode ? "shoot/revive boid" : "mark boid"}
           </li>
           <li style={{ minWidth: "88px" }}>
             <label className="switch">

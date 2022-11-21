@@ -87,16 +87,7 @@ function init(boidsCount, boidBox) {
   const onKeyPress = function (event) {
     switch (event.code) {
       case "KeyT":
-        // annoying workaround because using this
-        // with react for some reason registers a
-        // keypress twice. So just divide the count
-        // by 2 and if even it's false.
         pauseBoids = !pauseBoids;
-        // pauseCount += 1;
-        // Math.floor(pauseCount / 2) % 2 === 0
-        //   ? (pauseBoids = false)
-        //   : (pauseBoids = true);
-        console.log(pauseBoids);
         break;
       case "KeyF":
         controls.getDirection(mouse3D);
@@ -133,36 +124,36 @@ function init(boidsCount, boidBox) {
           }
         }
         break;
-      case "KeyU":
-        boids.avoidFactor += 1;
-        console.log("avoidFactor: %o", boids.avoidFactor);
-        break;
-      case "KeyJ":
-        if (boids.avoidFactor > 0) {
-          boids.avoidFactor -= 1;
-        }
-        console.log("avoidFactor: %o", boids.avoidFactor);
-        break;
-      case "KeyI":
-        boids.alignFactor += 1;
-        console.log("alignFactor: %o", boids.alignFactor);
-        break;
-      case "KeyK":
-        if (boids.alignFactor > 0) {
-          boids.alignFactor -= 1;
-        }
-        console.log("alignFactor: %o", boids.alignFactor);
-        break;
-      case "KeyO":
-        boids.centeringFactor += 1;
-        console.log("centeringFactor: %o", boids.centeringFactor);
-        break;
-      case "KeyL":
-        if (boids.centeringFactor > 0) {
-          boids.centeringFactor -= 1;
-        }
-        console.log("centeringFactor: %o", boids.centeringFactor);
-        break;
+      // case "KeyU":
+      //   boids.avoidFactor += 1;
+      //   console.log("avoidFactor: %o", boids.avoidFactor);
+      //   break;
+      // case "KeyJ":
+      //   if (boids.avoidFactor > 0) {
+      //     boids.avoidFactor -= 1;
+      //   }
+      //   console.log("avoidFactor: %o", boids.avoidFactor);
+      //   break;
+      // case "KeyI":
+      //   boids.alignFactor += 1;
+      //   console.log("alignFactor: %o", boids.alignFactor);
+      //   break;
+      // case "KeyK":
+      //   if (boids.alignFactor > 0) {
+      //     boids.alignFactor -= 1;
+      //   }
+      //   console.log("alignFactor: %o", boids.alignFactor);
+      //   break;
+      // case "KeyO":
+      //   boids.centeringFactor += 1;
+      //   console.log("centeringFactor: %o", boids.centeringFactor);
+      //   break;
+      // case "KeyL":
+      //   if (boids.centeringFactor > 0) {
+      //     boids.centeringFactor -= 1;
+      //   }
+      //   console.log("centeringFactor: %o", boids.centeringFactor);
+      //   break;
     }
   };
 
