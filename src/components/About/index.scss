@@ -9,6 +9,11 @@
   overflow: hidden;
 }
 
+.boids-text-link,
+.huffman-text-link {
+  color: #ffd700;
+}
+
 .cubeSpinner {
   animation-name: spincube;
   animation-timing-function: ease-in-out;

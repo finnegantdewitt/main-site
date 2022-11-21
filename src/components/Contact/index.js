@@ -48,10 +48,8 @@ const Contact = () => {
             />
           </h1>
           <p>
-            I'm a college student attending University of California, Santa Cruz
-            planning to graduate in December of 2022. Looking for job
-            opportunities working in javascript or python. Feel free to contact
-            me using the form below.
+            I'm looking for job opportunities working on javascript or python in
+            the bay area. Feel free to contact me using the form below.
           </p>
           <div className="contact-form">
             <form ref={refForm} onSubmit={sendEmail}>

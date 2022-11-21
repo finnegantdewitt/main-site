@@ -5,6 +5,7 @@ import {
   faPython,
   faReact,
 } from "@fortawesome/free-brands-svg-icons";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import Loader from "react-loaders";
@@ -33,25 +34,44 @@ const About = () => {
             />
           </h1>
           <p>
-            Please please please hire me. I want a job so fricken bad. I want to
-            make monnnnnnnney
-          </p>
-          {/* <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
+            I'm a college student attending the University of California, Santa
+            Cruz planning to graduate in December of 2022, majoring in Computer
+            Science. My experience with programming started in high school when
+            I learned C++. I then branched out into playing with many different
+            languages and web technologies, including projects like building an
+            email server on an AWS free-tier instance, which honed my bash
+            skills, and making a maze solver in C#
           </p>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
-          </p> */}
+            My professional experience comes from one year at a startup called
+            Foodhaven. The goal of this company is to serve leftover food at
+            discounted prices when a restaurant is closing. For this job, I
+            programmed the business dashboard using React JS, along with helping
+            with the mobile app (react-native).
+          </p>
+          <p>
+            Now, I feel confident programming in many languages with my biggest
+            strengths being javascript and python. You can check out 2 of my
+            favorite (and actually finished) javascript/typescript projects on
+            this site. The first is{" "}
+            <NavLink
+              exact="true"
+              activeclassname="active"
+              className="boids-text-link"
+              to="/boids"
+            >
+              boids simulation project
+            </NavLink>
+            , and the second is a{" "}
+            <NavLink
+              exact="true"
+              activeclassname="active"
+              className="huffman-text-link"
+              to="/huffman"
+            >
+              visualization of the Huffman coding compression algorithm.
+            </NavLink>
+          </p>
         </div>
 
         <div className="stage-cube-cont">

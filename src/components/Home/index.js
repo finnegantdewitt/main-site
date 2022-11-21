@@ -8,8 +8,8 @@ import Loader from "react-loaders";
 
 const Home = () => {
   const [letterClass, setLetterClass] = useState("text-animate");
-  const nameArray = "innegan.".split("");
-  const jobArray = "A Developer".split("");
+  const nameArray = "innegan,".split("");
+  const jobArray = "the Programmer.".split("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,7 +42,7 @@ const Home = () => {
               idx={22}
             />
           </h1>
-          <h2>Frontend Developer / JavaScript Expert</h2>
+          <h2>JavaScript Developer / Pythoneer</h2>
           <Link to="/contact" className="flat-button">
             CONTACT ME
           </Link>
