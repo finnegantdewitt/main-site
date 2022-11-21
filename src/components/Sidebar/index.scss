@@ -44,6 +44,7 @@
       .custom-svg {
         width: 20px;
         height: auto;
+        transform: translate(-1px, 5px);
       }
 
       i {
@@ -92,6 +93,12 @@
     a.contact-link {
       &:after {
         content: "CONTACT";
+      }
+    }
+
+    a.huffman-link {
+      &:after {
+        content: "HUFFMAN";
       }
     }
 
