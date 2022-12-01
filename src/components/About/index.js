@@ -46,8 +46,8 @@ const About = () => {
             My professional experience comes from one year at a startup called
             Foodhaven. The goal of this company is to serve leftover food at
             discounted prices when a restaurant is closing. For this job, I
-            programmed the business dashboard using React JS, along with helping
-            with the mobile app (react-native).
+            programmed the business dashboard using React JS, along with
+            developing with the mobile app (react-native).
           </p>
           <p>
             Now, I feel confident programming in many languages with my biggest

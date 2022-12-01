@@ -9,7 +9,7 @@ import Loader from "react-loaders";
 const Home = () => {
   const [letterClass, setLetterClass] = useState("text-animate");
   const nameArray = "innegan,".split("");
-  const jobArray = "the Programmer.".split("");
+  const jobArray = "Programmer.".split("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -47,7 +47,6 @@ const Home = () => {
             CONTACT ME
           </Link>
         </div>
-        <Logo />
       </div>
       <Loader type="pacman" />
     </>
