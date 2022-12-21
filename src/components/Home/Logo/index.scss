@@ -1,34 +1,76 @@
+/// Mixin to place items on a circle
+/// @author Kitty Giraudel
+/// @author Ana Tudor
+/// @param {Integer} $item-count - Number of items on the circle
+/// @param {Length} $circle-size - Large circle size
+/// @param {Length} $item-size - Single item size
+@mixin on-circle($item-count, $circle-size, $item-size) {
+  position: relative;
+  width: $circle-size;
+  height: $circle-size;
+  padding: 0;
+  border-radius: 50%;
+  list-style: none;
+
+  > * {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $item-size;
+    height: $item-size;
+    margin: -($item-size / 2);
+
+    $angle: (360 / $item-count);
+    $rot: 0;
+
+    @for $i from 1 through $item-count {
+      &:nth-of-type(#{$i}) {
+        @if $i % 2 == 0 {
+          filter: invert(77%)
+            sepia(54%)
+            saturate(1126%)
+            hue-rotate(360deg)
+            brightness(104%)
+            contrast(104%);
+        } @else {
+          filter: invert(21%)
+            sepia(30%)
+            saturate(4086%)
+            hue-rotate(178deg)
+            brightness(90%)
+            contrast(87%);
+        }
+        transform: rotate($rot * 1deg)
+          translate($circle-size / 2)
+          rotate($rot * -1deg);
+      }
+
+      $rot: $rot + $angle;
+    }
+
+    animation: anim 6s infinite;
+  }
+
+  @keyframes anim {
+    50% {
+      transform: rotate(calc(270deg - (var(--1))));
+      rotate: 360deg;
+    }
+  }
+}
+
 .logo-container {
+  @include on-circle(18, 500px, 60px);
   z-index: 0;
   width: 400px;
   height: 609px;
-  opacity: 0;
   position: absolute;
   top: 0;
   right: 15%;
   bottom: 0;
   left: auto;
   margin: auto;
-
-  svg {
-    width: 100%;
-    height: auto;
-    bottom: 0;
-    transform: rotateZ(30deg) !important;
-  }
-
-  .solid-logo {
-    position: absolute;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: 0;
-    margin: auto;
-    width: 100%;
-    opacity: 0;
-    transform: rotateZ(30deg) !important;
-    z-index: 1;
-  }
 }
 
 .svg-container {

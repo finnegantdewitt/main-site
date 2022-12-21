@@ -124,6 +124,10 @@ function init(boidsCount, boidBox) {
           }
         }
         break;
+      /*
+          Keyboard controls for the boid factor
+          might add back at some point idk
+      */
       // case "KeyU":
       //   boids.avoidFactor += 1;
       //   console.log("avoidFactor: %o", boids.avoidFactor);
