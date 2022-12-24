@@ -238,6 +238,15 @@ const StepsPanel: React.FC<CommonArgs> = ({
         </a>
       </div>
       <div>
+        <p
+          style={{
+            fontWeight: "bold",
+            fontSize: "16px",
+            marginLeft: "15px",
+          }}
+        >
+          Visualization of the Huffman compression algorithm.
+        </p>
         <ol>
           <li>
             Read the text
