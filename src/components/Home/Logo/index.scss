@@ -50,7 +50,7 @@
 
     transform: translate(calc(var(--1) * 2px), calc(var(--1) * 2px));
 
-    animation: anim 6s 3s;
+    animation: anim 6s 3.5s;
 
     @keyframes anim {
       50% {

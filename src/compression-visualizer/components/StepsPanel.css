@@ -19,13 +19,14 @@ th {
   flex-wrap: wrap;
 }
 .row {
+  width: 100%;
   margin-left: -5px;
   margin-right: -5px;
 }
 
 .column {
   float: left;
-  width: 50%;
+  width: 20%;
   padding: 5px;
 }
 
