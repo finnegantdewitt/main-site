@@ -1,12 +1,17 @@
-import { useEffect, useRef } from "react";
+import { useState } from "react";
 import LogoF1SVG from "../../../assets/images/logo-f1.svg";
 import "./index.scss";
 
 const Logo = () => {
-  const bgRef = useRef();
+  const [animate, setAnimate] = useState(true);
 
   return (
-    <div className="logo-container" ref={bgRef}>
+    <div
+      className={"logo-container"}
+      ani={Number(animate)}
+      onClick={() => setAnimate((ani) => !ani)}
+      onAnimationEnd={() => setAnimate(false)}
+    >
       <img src={LogoF1SVG} style={{ "--1": "1" }} className="shape"></img>
       <img src={LogoF1SVG} style={{ "--1": "2" }} className="shape"></img>
       <img src={LogoF1SVG} style={{ "--1": "3" }} className="shape"></img>

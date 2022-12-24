@@ -1,8 +1,9 @@
-.logo-container {
-  $item-count: 18;
-  $circle-size: 450px;
-  $item-size: 55px;
+$item-count: 18;
+$circle-size: 450px;
+$item-size: 55px;
+$angle: calc(360 / $item-count);
 
+.logo-container {
   padding: 0;
   border-radius: 50%;
   list-style: none;
@@ -25,9 +26,6 @@
     height: $item-size;
     margin: calc(-1 * ($item-size / 2));
 
-    $angle: calc(360 / $item-count);
-    $rot: 0;
-
     @for $i from 1 through $item-count {
       &:nth-of-type(#{$i}) {
         @if $i % 2 != 0 {
@@ -49,17 +47,20 @@
     }
 
     transform: translate(calc(var(--1) * 2px), calc(var(--1) * 2px));
+  }
+}
 
-    animation: anim 6s 3.5s;
+@keyframes anim {
+  50% {
+    transform: rotate(calc($angle * var(--1) * 1deg))
+      translate(calc($circle-size / 2)) rotate(calc($angle * var(--1) * -1deg));
+    rotate: 360deg;
+  }
+}
 
-    @keyframes anim {
-      50% {
-        transform: rotate(calc($angle * var(--1) * 1deg))
-          translate(calc($circle-size / 2))
-          rotate(calc($angle * var(--1) * -1deg));
-        rotate: 360deg;
-      }
-    }
+.logo-container[ani="1"] {
+  > * {
+    animation: anim 6s;
   }
 }
 
