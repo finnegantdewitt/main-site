@@ -34,8 +34,8 @@ const About = () => {
             />
           </h1>
           <p>
-            I'm a college student attending the University of California, Santa
-            Cruz planning to graduate in December of 2022, majoring in Computer
+            I'm a software developer that graduated from the University of
+            California, Santa Cruz in December of 2022, majoring in Computer
             Science. My experience with programming started in high school when
             I learned C++. I then branched out into playing with many different
             languages and web technologies, including projects like building an
