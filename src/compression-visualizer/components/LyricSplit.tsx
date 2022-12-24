@@ -1,13 +1,13 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { HSBGlobalListener, HSBStyle } from './HoverStyleBodge';
-import TextPanel from './TextPanel';
-import StepsPanel from './StepsPanel';
-import { HexPanel, BinaryPanel } from './BytesPanel';
-import { Mosaic, MosaicNode, MosaicWindow } from 'react-mosaic-component';
-import { CommonArgs } from './common';
-import TreePanel from './TreePanel';
-import CompressedBinaryPanel from './CompressedBinaryPanel';
-import { CompressedHuffmanData } from '../classes/Huffman';
+import React, { Fragment, useState, useEffect } from "react";
+import { HSBGlobalListener, HSBStyle } from "./HoverStyleBodge";
+import TextPanel from "./TextPanel";
+import StepsPanel from "./StepsPanel";
+import { HexPanel, BinaryPanel } from "./BytesPanel";
+import { Mosaic, MosaicNode, MosaicWindow } from "react-mosaic-component";
+import { CommonArgs } from "./common";
+import TreePanel from "./TreePanel";
+import CompressedBinaryPanel from "./CompressedBinaryPanel";
+import { CompressedHuffmanData } from "../classes/Huffman";
 
 // calculates the entropy of the binary in average bits per symbol
 const calcEntropy = (compHuffData: Readonly<CompressedHuffmanData>) => {
@@ -20,12 +20,12 @@ const calcEntropy = (compHuffData: Readonly<CompressedHuffmanData>) => {
 };
 
 type PanelType =
-  | 'Text'
-  | 'Hex'
-  | 'Tree'
-  | 'SourceBinary'
-  | 'Steps'
-  | 'CompressedBinary';
+  | "Text"
+  | "Hex"
+  | "Tree"
+  | "SourceBinary"
+  | "Steps"
+  | "CompressedBinary";
 const paneltypeComponentMap: { [K in PanelType]: React.FC<CommonArgs> } = {
   Text: TextPanel,
   Steps: StepsPanel,
@@ -38,21 +38,21 @@ const paneltypeComponentMap: { [K in PanelType]: React.FC<CommonArgs> } = {
 // TODO: should rename `LyricSplit` to something more accurate
 const LyricSplit: React.FC<CommonArgs> = (params) => {
   const [mosaicValue, setMosaicValue] = useState<MosaicNode<PanelType> | null>({
-    direction: 'row',
+    direction: "row",
     splitPercentage: 100 / 3,
     first: {
-      direction: 'column',
-      first: 'Text',
-      second: 'Steps',
+      direction: "column",
+      first: "Text",
+      second: "Steps",
     },
     second: {
-      direction: 'column',
+      direction: "column",
       first: {
-        direction: 'row',
-        first: 'SourceBinary',
-        second: 'CompressedBinary',
+        direction: "row",
+        first: "SourceBinary",
+        second: "CompressedBinary",
       },
-      second: 'Tree',
+      second: "Tree",
     },
   });
 
@@ -80,12 +80,12 @@ const LyricSplit: React.FC<CommonArgs> = (params) => {
 
   const TITLE_MAP: Record<PanelType, string> = {
     Text: `Source Text`,
-    Steps: 'Steps',
-    Hex: 'Hex',
+    Steps: "Steps",
+    Hex: "Hex",
     SourceBinary: `Source Binary: ${sourceBinarySize} bytes, 8 bits/symbol`,
-    Tree: 'Huffman Tree',
+    Tree: "Huffman Tree",
     CompressedBinary: `Compressed Binary: ${compressedBinarySize} bytes, ${compressedBinaryEntropy.toFixed(
-      4,
+      4
     )} bits/symbol`,
   };
 
@@ -97,7 +97,11 @@ const LyricSplit: React.FC<CommonArgs> = (params) => {
         className="mosaic-blueprint-theme bp4-dark"
         blueprintNamespace="bp4"
         renderTile={(id, path) => (
-          <MosaicWindow<PanelType> path={path} title={TITLE_MAP[id]}>
+          <MosaicWindow<PanelType>
+            path={path}
+            title={TITLE_MAP[id]}
+            toolbarControls={[]}
+          >
             {React.createElement(paneltypeComponentMap[id], params, null)}
           </MosaicWindow>
         )}

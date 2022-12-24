@@ -1,16 +1,20 @@
-/// Mixin to place items on a circle
-/// @author Kitty Giraudel
-/// @author Ana Tudor
-/// @param {Integer} $item-count - Number of items on the circle
-/// @param {Length} $circle-size - Large circle size
-/// @param {Length} $item-size - Single item size
-@mixin on-circle($item-count, $circle-size, $item-size) {
-  position: relative;
-  width: $circle-size;
-  height: $circle-size;
+.logo-container {
+  $item-count: 18;
+  $circle-size: 450px;
+  $item-size: 55px;
+
   padding: 0;
   border-radius: 50%;
   list-style: none;
+  z-index: 0;
+  width: $circle-size;
+  height: $circle-size;
+  position: absolute;
+  top: 0;
+  right: 15%;
+  bottom: 0;
+  left: auto;
+  margin: auto;
 
   > * {
     display: block;
@@ -19,14 +23,14 @@
     left: 50%;
     width: $item-size;
     height: $item-size;
-    margin: -($item-size / 2);
+    margin: calc(-1 * ($item-size / 2));
 
-    $angle: (360 / $item-count);
+    $angle: calc(360 / $item-count);
     $rot: 0;
 
     @for $i from 1 through $item-count {
       &:nth-of-type(#{$i}) {
-        @if $i % 2 == 0 {
+        @if $i % 2 != 0 {
           filter: invert(77%)
             sepia(54%)
             saturate(1126%)
@@ -41,36 +45,22 @@
             brightness(90%)
             contrast(87%);
         }
-        transform: rotate($rot * 1deg)
-          translate($circle-size / 2)
-          rotate($rot * -1deg);
       }
-
-      $rot: $rot + $angle;
     }
 
-    animation: anim 6s infinite;
-  }
+    transform: translate(calc(var(--1) * 2px), calc(var(--1) * 2px));
 
-  @keyframes anim {
-    50% {
-      transform: rotate(calc(270deg - (var(--1))));
-      rotate: 360deg;
+    animation: anim 6s 3s;
+
+    @keyframes anim {
+      50% {
+        transform: rotate(calc($angle * var(--1) * 1deg))
+          translate(calc($circle-size / 2))
+          rotate(calc($angle * var(--1) * -1deg));
+        rotate: 360deg;
+      }
     }
   }
-}
-
-.logo-container {
-  @include on-circle(18, 500px, 60px);
-  z-index: 0;
-  width: 400px;
-  height: 609px;
-  position: absolute;
-  top: 0;
-  right: 15%;
-  bottom: 0;
-  left: auto;
-  margin: auto;
 }
 
 .svg-container {
