@@ -1,6 +1,6 @@
 $item-count: 18;
 $circle-size: 450px;
-$item-size: 55px;
+$item-size: 60px;
 $angle: calc(360 / $item-count);
 
 .logo-container {
@@ -25,6 +25,7 @@ $angle: calc(360 / $item-count);
     width: $item-size;
     height: $item-size;
     margin: calc(-1 * ($item-size / 2));
+    cursor: pointer;
 
     @for $i from 1 through $item-count {
       &:nth-of-type(#{$i}) {
@@ -47,6 +48,10 @@ $angle: calc(360 / $item-count);
     }
 
     transform: translate(calc(var(--1) * 2px), calc(var(--1) * 2px));
+
+    &:hover {
+      transform: translate(calc(var(--1) * 2px), calc(var(--1) * 2px - 3px));
+    }
   }
 }
 
