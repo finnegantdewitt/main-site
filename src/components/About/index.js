@@ -39,8 +39,8 @@ const About = () => {
             Science. My experience with programming started in high school when
             I learned C++. I then branched out into playing with many different
             languages and web technologies, including projects like building an
-            email server on an AWS free-tier instance, which honed my bash
-            skills, and making a maze solver in C#
+            email server on an AWS free-tier instance and making a maze solver
+            in C#
           </p>
           <p>
             My professional experience comes from one year at a startup called
