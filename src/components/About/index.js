@@ -40,7 +40,7 @@ const About = () => {
             I learned C++. I then branched out into playing with many different
             languages and web technologies, including projects like building an
             email server on an AWS free-tier instance and making a maze solver
-            in C#
+            in C#.
           </p>
           <p>
             My professional experience comes from one year at a startup called
@@ -51,9 +51,9 @@ const About = () => {
           </p>
           <p>
             Now, I feel confident programming in many languages with my biggest
-            strengths being javascript and python. You can check out 2 of my
-            favorite (and actually finished) javascript/typescript projects on
-            this site. The first is{" "}
+            strengths being javascript/typescript and python. You can check out
+            2 of my favorite (and actually finished) javascript/typescript
+            projects on this site. The first is{" "}
             <NavLink
               exact="true"
               activeclassname="active"
