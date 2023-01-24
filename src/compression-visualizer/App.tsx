@@ -8,6 +8,10 @@ import { CommonArgs } from "./components/common";
 import { useHsbData } from "./components/HoverStyleBodge";
 import { CompressedHuffmanData, TreeNode } from "./classes/Huffman";
 
+// a little janky to import it from there, but I just
+// want one MobileWarning file
+import MobileWarning from "../components/MobileWarning";
+
 function App() {
   const hsbData = useHsbData();
   const [displayText, setDisplayText] = useState<string>("");
@@ -50,21 +54,7 @@ function App() {
   return (
     <div className="AppC">
       {isMobile && !userHasBeenWarned ? (
-        <div style={{ marginTop: "1em", marginLeft: "1em" }}>
-          <div style={{ marginBottom: "1em" }}>
-            Please visit the site on a wider screen <br />
-            (It doesn't look very good on a phone)
-          </div>
-          <div>
-            <button
-              onClick={() => {
-                setUserHasBeenWarned(true);
-              }}
-            >
-              I know better just show me it anyway
-            </button>
-          </div>
-        </div>
+        <MobileWarning setUserHasBeenWarned={setUserHasBeenWarned} />
       ) : (
         <LyricSplit {...commonArgs} />
       )}
