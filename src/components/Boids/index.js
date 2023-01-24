@@ -12,6 +12,13 @@ const Boids = () => {
   const [avoidFactor, setAvoidFactor] = useState(50);
   const [alignFactor, setAlignFactor] = useState(50);
   const [centeringFactor, setCenteringFactor] = useState(50);
+  const [hasMouse, setHasMouse] = useState(true);
+
+  useEffect(() => {
+    if (window.matchMedia("(any-hover: none)").matches) {
+      setHasMouse(false);
+    }
+  }, []);
 
   useEffect(() => {
     let removeRenderer = init(boidsCount, {
@@ -159,6 +166,10 @@ const Boids = () => {
       <div id="blocker">
         <div id="instructions">
           <p style={{ fontSize: "36px", color: "white" }}>
+            {!hasMouse
+              ? "Warning: This game requires a mouse and keyboard"
+              : null}
+            <br />
             Click to Start <br /> ESC to Stop / Change settings
           </p>
         </div>
