@@ -23,7 +23,10 @@ const BoidsLayout = () => {
     <div className="App">
       <Sidebar />
       {isMobile && !userHasBeenWarned ? (
-        <MobileWarning setUserHasBeenWarned={setUserHasBeenWarned} />
+        <MobileWarning
+          setUserHasBeenWarned={setUserHasBeenWarned}
+          extraText={"This demo also requires a keyboard and mouse."}
+        />
       ) : (
         <div className="page">
           <Outlet />

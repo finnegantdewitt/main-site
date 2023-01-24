@@ -1,6 +1,6 @@
 import "./index.scss";
 
-const MobileWarning = ({ setUserHasBeenWarned }) => {
+const MobileWarning = ({ setUserHasBeenWarned, extraText = null }) => {
   return (
     <div className="warning-div">
       <div className="warning-text">
@@ -8,7 +8,8 @@ const MobileWarning = ({ setUserHasBeenWarned }) => {
         It looks like you're visiting this site from a mobile device. I haven't
         made the site compatible with screens this size yet (working on it).
         Please visit the from a larger device, or expand the width of the
-        window.
+        window. <br />
+        {extraText}
       </div>
       <div>
         <button
