@@ -61,7 +61,7 @@ const Boids = () => {
             <input
               type="range"
               min="1"
-              max="500"
+              max="999"
               id="boidsCountSlider"
               value={boidsCount}
               onChange={(e) => {
