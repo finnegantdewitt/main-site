@@ -7,7 +7,7 @@ import MobileWarning from "../MobileWarning";
 const BoidsLayout = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const [userHasBeenWarned, setUserHasBeenWarned] = useState(false);
-  const isMobile = width <= 1089;
+  const isMobile = width <= 500;
 
   function handleWindowSizeChange() {
     setWidth(window.innerWidth);

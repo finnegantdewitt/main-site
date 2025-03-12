@@ -36,24 +36,23 @@ const About = () => {
           <p>
             I'm a software developer that graduated from the University of
             California, Santa Cruz in December of 2022, majoring in Computer
-            Science. My experience with programming started in high school when
-            I learned C++. I then branched out into playing with many different
-            languages and web technologies, including projects like building an
-            email server on an AWS free-tier instance and making a maze solver
-            in C#.
+            Science. My experience with programming started in high school with
+            C++. Then I branched out into learning many different
+            languages and web technologies.
           </p>
           <p>
             My professional experience comes from one year at a startup called
-            Foodhaven. The goal of this company is to serve leftover food at
-            discounted prices when a restaurant is closing. For this job, I
-            programmed the business dashboard using React JS, along with
-            developing with the mobile app (react-native).
+            Foodhaven. The goal of the company is to serve leftover food at
+            discounted prices when a restaurant is closing for the night. 
+            For this job, I programmed the business dashboard using React 
+            JS, along with development of the mobile app using react-native.
+            Now I work as a Solutions Engineer at Deloitte.
           </p>
           <p>
-            Now, I feel confident programming in many languages with my biggest
+            I feel confident programming in many languages with my biggest
             strengths being javascript/typescript and python. You can check out
-            2 of my favorite (and actually finished) javascript/typescript
-            projects on this site. The first is{" "}
+            2 of my favorite javascript/typescript projects on this site. The 
+            first is{" "}
             <NavLink
               exact="true"
               activeclassname="active"

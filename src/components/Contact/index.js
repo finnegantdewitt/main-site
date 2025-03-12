@@ -48,8 +48,7 @@ const Contact = () => {
             />
           </h1>
           <p>
-            I'm looking for job opportunities working on javascript or python in
-            the bay area. Feel free to contact me using the form below.
+            Feel free to contact me using the form below.
           </p>
           <div className="contact-form">
             <form ref={refForm} onSubmit={sendEmail}>

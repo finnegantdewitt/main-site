@@ -37,7 +37,7 @@ function App() {
     };
   }, []);
 
-  const isMobile = width <= 1000;
+  const isMobile = width <= 500;
 
   const commonArgs: CommonArgs = {
     displayText,
